@@ -65,16 +65,23 @@ class GameTest < MiniTest::Unit::TestCase
     refute @game.board[1][0]
   end
 
-  def test_validate_placement_finds_placed_markers
+  def test_marker_status_finds_placed_markers
     assert @game.place_ship(1,0,0,'h')
-    assert_equal @game.validate_placement(0,0), "taken"
-    assert_equal @game.validate_placement(5,5), "empty"
+    assert_equal @game.marker_status(0,0), "taken"
+    assert_equal @game.marker_status(5,5), "empty"
   end
 
-  # def test_ship_cannot_be_placed_on_taken_spot
-  #   @game.place_ship(5,0,0,'h')
-  #   @game.place_ship
-  # end
+  def test_validate_placement
+    assert @game.place_ship(5,0,4,'h')
+    assert_equal false, @game.validate_placement(1,0,4,'h')
+    assert_equal true, @game.validate_placement(1,3,3,'h')
+    assert_equal false, @game.validate_placement(3,0,2,'h')
+  end
+
+  def test_ship_cannot_be_placed_on_taken_spot
+     assert @game.place_ship(5,0,0,'h')
+     refute @game.place_ship(5,0,0,'h')
+  end
 
 end
 
