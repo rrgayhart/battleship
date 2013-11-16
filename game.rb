@@ -1,17 +1,36 @@
 
 class Game
-  attr_accessor :board, :player0, :player1, :turn
+  attr_accessor :board, :player, :board0, :board1, :player0, :player1, :turn
 
   def initialize(size)
-    @board = make_board(size)
-    @player0 = Player.new
-    @player1 = Player.new
+    @board0 ||= make_board(size)
+    @board1 ||= make_board(size)
+    @player0 ||= Player.new
+    @player1 ||= Player.new
     @player1.id = 1
     @turn = 0
+    @player = who_is_playing
+    @board = which_board
   end
 
   def make_board(size)
     Array.new(size) { Array.new(size)}
+  end
+
+  def who_is_playing
+    if @turn == 0
+      return @player0
+    else
+      return @player1
+    end
+  end
+
+  def which_board
+    if @turn == 0
+      return @board0
+    else
+      return @board1
+    end
   end
 
   def display_board
@@ -50,6 +69,14 @@ class Game
     end
   end
 
+  def validate_placement(x,y)
+    status = "empty"
+    if @board[x][y]
+      status = "taken"
+    end
+    status
+  end
+
   def find_ship(ship_id)
     ships = who_is_playing.ships.select do |ship|
       ship.id == ship_id
@@ -63,12 +90,6 @@ class Game
     end
   end
 
-  def who_is_playing
-    if @turn == 0
-      return @player0
-    else
-      return @player1
-    end
-  end
+
 
 end
