@@ -1,8 +1,9 @@
 
 class Ship
-  attr_accessor :size, :name, :hits
+  attr_accessor :size, :name, :hits, :id
 
   def initialize(id)
+    @id = id
     @size = get_size(id)
     @name = get_name(id)
     @hits ||= 0

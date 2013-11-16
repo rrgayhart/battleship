@@ -39,6 +39,25 @@ class GameTest < MiniTest::Unit::TestCase
     assert_equal @game.turn, 0
   end
 
+  def test_who_is_playing_returns_player
+    assert_equal @game.who_is_playing, @game.player0
+  end
+
+  def test_move_plays_a_turn
+    assert_equal @game.turn, 0
+    @game.move
+    assert_equal @game.turn, 1
+  end
+
+  def test_find_ship_finds_ship
+    assert_equal Ship.new(5).name, @game.find_ship(5).name
+  end
+
+  def test_the_game_has_two_players
+    assert_equal @game.player1.id, 1
+    assert_equal @game.player0.id, 0
+  end
+
   # def test_a_ship_can_be_places_a_ship
   #   assert @game.place_ship(1,'b',2,'h')
   # end

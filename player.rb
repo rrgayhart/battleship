@@ -1,8 +1,9 @@
 class Player
-  attr_reader :ships
+  attr_accessor :ships, :id
   
   def initialize
     @ships ||= player_ships
+    @id ||= 0
   end
 
   def player_ships
