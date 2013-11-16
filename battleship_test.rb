@@ -28,8 +28,22 @@ class GameTest < MiniTest::Unit::TestCase
   end
 
   def test_a_game_has_players
-    refute_equal @game.player1, @game.player2
+    refute_equal @game.player0, @game.player1
   end
+
+  def test_a_game_has_turns
+    assert_equal @game.turn, 0
+    @game.play_turn
+    assert_equal @game.turn, 1
+    @game.play_turn
+    assert_equal @game.turn, 0
+  end
+
+  # def test_a_ship_can_be_places_a_ship
+  #   assert @game.place_ship(1,'b',2,'h')
+  # end
+
+
 end
 
 class ShipTest < MiniTest::Unit::TestCase
