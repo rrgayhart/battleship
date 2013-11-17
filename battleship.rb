@@ -50,8 +50,7 @@ engine = Battleship.new
 game = engine.game
 engine.welcome
 
-# game.place_ship(5, 0, 0, 'h')
-# game.place_ship(2, 4, 4, 'v')
+
 
 
 

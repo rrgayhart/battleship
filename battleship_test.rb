@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative 'battleship'
+require_relative 'game'
 
 class BattleshipTest < MiniTest::Unit::TestCase
 

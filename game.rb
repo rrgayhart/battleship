@@ -1,3 +1,6 @@
+require_relative 'ship'
+require_relative 'player'
+require_relative 'moves'
 
 class Game
   attr_accessor :board, :player, :board0, :board1, :player0, :player1, :turn
