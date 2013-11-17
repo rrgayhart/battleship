@@ -1,8 +1,11 @@
 require_relative 'ship'
 require_relative 'player'
 require_relative 'moves'
+require_relative 'validations'
 
 class Game
+  include Moves
+  include Validations
   attr_accessor :board, :player, :board0, :board1, :player0, :player1, :turn
 
   def initialize(size)
@@ -48,50 +51,6 @@ class Game
     end
   end
 
-  def move
-    player = who_is_playing
-    play_turn
-  end
-
-  def place_ship(ship_id, x, y, orientation)
-    player = who_is_playing
-    ship_length = find_ship(ship_id).size
-    if validate_placement(ship_length, x, y, orientation)
-      marker = [player.id, ship_id]
-      x = x
-      y = y
-      if orientation == 'v'
-        ship_length.times do
-          @board[x][y] = marker
-          x += 1
-        end
-      else
-        ship_length.times do
-          @board[x][y] = marker
-          y += 1
-        end
-      end
-    else
-    end
-  end
-
-  def validate_placement(length,x,y,orientation)
-    valid = true
-    length.times do
-      if marker_status(x,y) == "taken"
-        valid = false
-        break
-      else
-        if orientation == "v"
-          x += 1
-        else
-          y += 1
-        end
-      end
-    end
-    valid
-  end
-
   def marker_status(x,y)
     status = "empty"
     if @board[x][y]
@@ -104,13 +63,6 @@ class Game
     ships = who_is_playing.ships.select do |ship|
       ship.id == ship_id
     end.first
-  end
-
-  def play_turn
-    if @turn == 0
-      @turn += 1
-    else @turn = 0
-    end
   end
 
 

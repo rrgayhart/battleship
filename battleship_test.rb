@@ -3,6 +3,25 @@ require 'minitest/pride'
 require_relative 'game'
 
 class BattleshipTest < MiniTest::Unit::TestCase
+  
+  def setup
+    @game = Game.new(12)
+    @player0 = @game.player0
+    @player1 = @game.player1
+  end
+
+  def test_welcome_place_boats
+    skip
+    patrol_boat_coord = [A, 1, 'h']
+    destroyer_coord = [D, 1,'v']
+    submarine_coord = [F, 3,'h']
+    battleship_coord = [G, 1, 'h']
+    aircraft_car_coord = [E, 10, 'h']
+    @game.welcome_place_ships[]
+  end
+  #Player should be prompted to place
+  #all five of his ships on the board
+
 
 end
 
@@ -81,6 +100,11 @@ class GameTest < MiniTest::Unit::TestCase
   def test_ship_cannot_be_placed_on_taken_spot
      assert @game.place_ship(5,0,0,'h')
      refute @game.place_ship(5,0,0,'h')
+  end
+
+  def test_x_coord_translator_finds_correct_coord
+    assert_equal 0, @game.x_translate('a')
+    assert_equal 1, @game.x_translate('B')
   end
 
 end
