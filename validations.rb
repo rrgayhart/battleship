@@ -6,4 +6,8 @@ module Validations
     x_coord.select {|x| x[0] == letter }[0][1]
   end
 
+  def boat_translate
+
+  end
+
 end

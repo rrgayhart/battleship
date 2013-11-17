@@ -1,8 +1,9 @@
+gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'game'
 
-class BattleshipTest < MiniTest::Unit::TestCase
+class BattleshipTest < MiniTest::Test
   
   def setup
     @game = Game.new(12)
@@ -25,7 +26,21 @@ class BattleshipTest < MiniTest::Unit::TestCase
 
 end
 
-class GameTest < MiniTest::Unit::TestCase
+class ValidationsTest < MiniTest::Test
+
+  def setup
+    @game = Game.new(12)
+    @player0 = @game.player0
+    @player1 = @game.player1
+  end
+
+  def test_x_coord_translator_finds_correct_coord
+    assert_equal 0, @game.x_translate('a')
+    assert_equal 1, @game.x_translate('B')
+  end
+end
+
+class GameTest < MiniTest::Test
 
   def setup
     @game = Game.new(12)
@@ -102,14 +117,9 @@ class GameTest < MiniTest::Unit::TestCase
      refute @game.place_ship(5,0,0,'h')
   end
 
-  def test_x_coord_translator_finds_correct_coord
-    assert_equal 0, @game.x_translate('a')
-    assert_equal 1, @game.x_translate('B')
-  end
-
 end
 
-class ShipTest < MiniTest::Unit::TestCase
+class ShipTest < MiniTest::Test
   def setup
     @ship = Ship.new(5)
   end
@@ -134,7 +144,7 @@ class ShipTest < MiniTest::Unit::TestCase
 
 end
 
-class PlayerTest < MiniTest::Unit::TestCase
+class PlayerTest < MiniTest::Test
   def setup
     @player1 = Player.new
     @player2 = Player.new
