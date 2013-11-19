@@ -17,7 +17,7 @@ module Moves
     ship_length = find_ship(ship_id).size
     if validate_placement(ship_length, x, y, orientation)
       marker = [player.id, ship_id]
-      x = x
+      x = x_translate(x)
       y = y
       if orientation == 'v'
         ship_length.times do
@@ -34,21 +34,6 @@ module Moves
     end
   end
 
-  def validate_placement(length,x,y,orientation)
-    valid = true
-    length.times do
-      if marker_status(x,y) == "taken"
-        valid = false
-        break
-      else
-        if orientation == "v"
-          x += 1
-        else
-          y += 1
-        end
-      end
-    end
-    valid
-  end
+
 
 end

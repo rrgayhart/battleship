@@ -38,6 +38,21 @@ class ValidationsTest < MiniTest::Test
     assert_equal 0, @game.x_translate('a')
     assert_equal 1, @game.x_translate('B')
   end
+
+  def test_validate_placement
+    assert @game.place_ship(5,'a',4,'h')
+    assert_equal false, @game.validate_placement(1,'a',4,'h')
+    assert_equal true, @game.validate_placement(1,'d',3,'h')
+    assert_equal false, @game.validate_placement(3,'a',2,'h')
+  end
+
+  def test_boat_translate_provides_updated_info
+    boat_markers = @game.boat_translate(5, 'a', 0, 'v')
+    assert_equal boat_markers[0], [0,0]
+    assert_equal boat_markers[4], [0,4]
+    boat_markers = @game.boat_translate(5, 'a', 0, 'h')
+    assert_equal boat_markers[4], [4,0]
+  end
 end
 
 class GameTest < MiniTest::Test
@@ -93,28 +108,21 @@ class GameTest < MiniTest::Test
   end
 
   def test_a_ship_can_be_placed
-    assert @game.place_ship(1,0,0,'h')
+    assert @game.place_ship(1,'a',0,'h')
     assert @game.board[0][0]
     assert @game.board[0][1]
     refute @game.board[1][0]
   end
 
   def test_marker_status_finds_placed_markers
-    assert @game.place_ship(1,0,0,'h')
+    assert @game.place_ship(1,'a',0,'h')
     assert_equal @game.marker_status(0,0), "taken"
     assert_equal @game.marker_status(5,5), "empty"
   end
 
-  def test_validate_placement
-    assert @game.place_ship(5,0,4,'h')
-    assert_equal false, @game.validate_placement(1,0,4,'h')
-    assert_equal true, @game.validate_placement(1,3,3,'h')
-    assert_equal false, @game.validate_placement(3,0,2,'h')
-  end
-
   def test_ship_cannot_be_placed_on_taken_spot
-     assert @game.place_ship(5,0,0,'h')
-     refute @game.place_ship(5,0,0,'h')
+     assert @game.place_ship(5,'a',0,'h')
+     refute @game.place_ship(5,'a',0,'h')
   end
 
 end

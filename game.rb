@@ -51,14 +51,6 @@ class Game
     end
   end
 
-  def marker_status(x,y)
-    status = "empty"
-    if @board[x][y]
-      status = "taken"
-    end
-    status
-  end
-
   def find_ship(ship_id)
     ships = who_is_playing.ships.select do |ship|
       ship.id == ship_id
