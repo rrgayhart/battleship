@@ -2,24 +2,20 @@ require_relative 'game'
 require_relative 'ship'
 require_relative 'player'
 require_relative 'moves'
+require_relative 'stories'
 
 class Battleship
   attr_accessor :game
   include Moves
+  include Stories
 
   def initialize
     @game ||= Game.new(12)
   end
 
   def welcome
-    puts "Welcome to Battleship! There are two players 
-    and you sink some ships. What could be better than that?"
-    puts "Each player has 5 boats of different sizes and you try
-    to sink the other player's boats."
-    puts "Let's start with Player 1. Player 2... look away."
-    puts "Press any key to continue when you're ready..."
-    next_move
-    puts "Great. Let's place your five ships"
+    # welcome_story1
+    # welcome_story2
     ship_count = 5
     5.times do
       board_set_up(5)
@@ -28,8 +24,7 @@ class Battleship
   end
 
   def board_set_up(ship)
-    puts "Here is your board."
-    @game.display_board
+    #board_set_up1
     puts "place your ship by picking 0-11"
     x = next_move.to_i
     puts "place your ship by picking 0-11"
