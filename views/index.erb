@@ -5,11 +5,13 @@
     <script src='application.js'></script>
   </head>
   <body>
-    <h1 class='target'>Hello, sad and plain HTML world.</h1>
+    <h1 class='target'>Our Ships.</h1>
     <% @ships.each do |ship| %>
     <ul>
-      <li><%= ship %></li>
+      <li><%= ship[1] %></li>
     </ul>
     <% end %>
+    <h1 class='target'>Our Board.</h1>
+    <%= @board %>
   </body>
 </html>

@@ -4,9 +4,7 @@ require './rules'
 
 get '/' do
   @ships = Game.new(12).ship_types
+  @board = Game.new(12).board
   erb :index
 end
 
-post '/ships' do
-  ship = Ship.new(1).ship_types
-end

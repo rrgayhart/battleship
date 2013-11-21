@@ -21,10 +21,6 @@ class Game
     @board = which_board
   end
 
-  def make_board(size)
-    Array.new(size) { Array.new(size)}
-  end
-
   def who_is_playing
     if @turn == 0
       return @player0
