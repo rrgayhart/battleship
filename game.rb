@@ -2,10 +2,12 @@ require_relative 'ship'
 require_relative 'player'
 require_relative 'moves'
 require_relative 'validations'
+require_relative 'rules'
 
 class Game
   include Moves
   include Validations
+  include Rules
   attr_accessor :board, :player, :board0, :board1, :player0, :player1, :turn
 
   def initialize(size)

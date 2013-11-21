@@ -1,5 +1,7 @@
+require_relative 'rules'
 
 class Ship
+  include Rules
   attr_accessor :size, :name, :hits, :id
 
   def initialize(id)
@@ -16,9 +18,4 @@ class Ship
   def get_name(id)
     ship_types[id][1]
   end
-
-  def ship_types
-    {5 => [5, "Aircraft Carrier"], 4 => [4, "Battleship"], 3 => [3, "Submarine"], 2 => [3, "Destroyer"], 1 => [2, "Patrol Boat"]}
-  end
-
 end
