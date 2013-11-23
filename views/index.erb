@@ -1,17 +1,23 @@
 <html>
   <head>
     <title>HelloJQ</title>
+    <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src='application.js'></script>
   </head>
   <body>
-    <h1 class='target'>Our Ships.</h1>
+    <div class='h1-style'>
+      <h1 class='target'>Our Ships.</h1>
+    </div>
     <% @ships.each do |ship| %>
     <ul>
       <li><%= ship[1] %></li>
     </ul>
     <% end %>
-    <h1 class='target'>Our Board.</h1>
+    <div class='h1-style'>
+      <h1 class='target'>Our Board.</h1>
+    </div>
+    <p>
     <%= @board %>
   </body>
 </html>
