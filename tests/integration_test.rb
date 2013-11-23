@@ -1,7 +1,7 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../game'
+require_relative '../lib/game'
 
 class IntegrationTest < MiniTest::Test
 
