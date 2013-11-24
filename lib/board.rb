@@ -11,6 +11,43 @@ class Board
     Array.new(size) { Array.new(size)}
   end
 
+#This should move to game and the logic should
+#be in board
+  def play_move(x,y)
+    if marker_taken?(x,y)
+      # Switch to opponants board
+      # Grab the id
+      # Check if all other instances of the id are 'hit'
+      # If not, Add 'hit' as status
+      # Return Hit
+      # If all except this one has a hit
+      # Set status as "sunk" for all matching ship ids
+      # Return 'YOU SUNK A SHIP'
+    else
+      #set the status as "miss"
+      #return 'MISS'
+    end
+  end
+
+  # def find_ship_markers(ship)
+  #   markers = []
+  #   length = ship.size
+  #   id = ship.id
+  #   checkable_rows = @board_view
+  #   measure = 0
+  #   checkable_rows.each do |row|
+  #     measure += 1
+  #     if row.include?(id)
+  #       break
+  #     end
+  #   end 
+  #   checkable_rows
+  #   x = measure - 1
+  #   checkable_rows[x].count
+  # end
+
+
+
   def marker_taken?(x,y)
     marker = find_marker(x,y)
     if find_marker(x,y)
@@ -18,6 +55,19 @@ class Board
     end
   end
 
+  def return_ship_id(x,y)
+    marker = find_marker(x,y)
+    ship_id = marker.grep(Fixnum)
+    ship_id[0]
+  end
+
+  def return_status(x,y)
+    marker = find_marker(x,y)
+    if find_marker(x,y)
+      status = marker.grep(String)
+      status[0]
+    end
+  end
 
   def place_ship(x,y,orientation,ship)
     times = ship.size - 1
@@ -34,27 +84,6 @@ class Board
     else
       return "Sorry the ship cannot go there"
     end
-  # def place_ship(ship_id, x, y, orientation)
-  #   player = who_is_playing
-  #   ship_length = find_ship(ship_id).size
-  #   if validate_placement(ship_length, x, y, orientation)
-  #     marker = [player.id, ship_id]
-  #     x = x_translate(x)
-  #     y = y
-  #     if orientation == 'v'
-  #       ship_length.times do
-  #         @board[x][y] = marker
-  #         x += 1
-  #       end
-  #     else
-  #       ship_length.times do
-  #         @board[x][y] = marker
-  #         y += 1
-  #       end
-  #     end
-  #   else
-  #   end
-  # end
   end
 
   def validate_placement(x,y,length,orientation)
@@ -74,6 +103,17 @@ class Board
       end
     end
     return valid
+  end
+
+  def place_status(x,y,status)
+    if find_marker(x,y)
+      if return_status(x,y)
+        @board_view[x][y].delete(return_status(x,y))
+      end
+      @board_view[x][y] << status
+    else
+      @board_view[x][y] = [status]
+    end
   end
 
   def place_ship_mark(x,y,ship_id)

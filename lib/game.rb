@@ -10,6 +10,8 @@ class Game
   attr_accessor :board0, :board1, :player0, :player1, :turn
 
   def initialize(size=12)
+    #Will need to add 'current player board'
+    #And OpponantBoard
     @board0 ||= Board.new
     @board1 ||= Board.new
     @player0 ||= Player.new
