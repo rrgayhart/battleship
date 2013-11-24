@@ -1,9 +1,9 @@
 class Player
   attr_accessor :ships, :id
   
-  def initialize
+  def initialize(id=0)
     @ships ||= player_ships
-    @id ||= 0
+    @id = id
   end
 
   def player_ships

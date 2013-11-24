@@ -20,6 +20,11 @@ class BattleshipTest < MiniTest::Test
     aircraft_car_coord = [E, 10, 'h']
     @game.welcome_place_ships[]
   end
+
+  def test_a_player_has_his_her_own_board
+    skip
+    assert @player0.board
+  end
   #Player should be prompted to place
   #all five of his ships on the board
 
