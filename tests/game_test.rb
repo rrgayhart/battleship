@@ -35,12 +35,6 @@ class GameTest < MiniTest::Test
     assert_equal @game.who_is_playing, @game.player0
   end
 
-  def test_move_plays_a_turn
-    assert_equal @game.turn, 0
-    @game.move
-    assert_equal @game.turn, 1
-  end
-
   def test_find_ship_finds_ship
     assert_equal Ship.new(5).name, @game.find_ship(5).name
   end
@@ -61,30 +55,44 @@ class GameTest < MiniTest::Test
 
   def test_play_move_on_empty_spot_sets_status_to_miss
     @game.play_move(0,0)
-    board = @game.opponant_board
+    board = @game.player_board
     assert_equal "miss", board.return_status(0,0)
   end
 
   def test_hitting_all_spots_on_ship_returns_sunk
     opponant = @game.opponant
     ship = opponant.ships[0]
-    board = @game.opponant_board
-    board.place_ship(0,0,'h',ship)
+    opponant_board = @game.opponant_board
+    player_board = @game.player_board
+    opponant_board.place_ship(0,0,'h',ship)
     @game.play_move(0,0)
-    assert_equal "hit", board.return_status(0,0)
+    assert_equal "hit", opponant_board.return_status(0,0)
     @game.play_move(0,1)
-    assert_equal "sunk", board.return_status(0,1)
-    assert_equal "sunk", board.return_status(0,0)
+    @game.play_move(0,1)
+    assert_equal "sunk", opponant_board.return_status(0,1)
+    assert_equal "sunk", opponant_board.return_status(0,0)
   end
 
-  def test_play_move_on_taken_spot_returns_hit_for_all_ids
-    skip
-    @board.place_ship_mark(1,0,1)
-    @board.place_ship_mark(1,1,1)
-    @board.play_move(1,0)
-    @board.play_move(1,1)
-    assert_equal "sunk", @board.return_status(1,1)
-    assert_equal "sunk", @board.return_status(1,0)
+  def test_successfully_playing_a_move_changes_boards
+    opponant = @game.opponant
+    opponant_board = @game.opponant_board
+    @game.play_move(0,0)
+    assert_equal @game.who_is_playing, opponant
+    refute_equal @game.opponant, opponant
+    assert_equal @game.player_board, opponant_board
+    refute_equal @game.opponant_board, opponant_board
   end
 
+  def test_unsuccessful_move_does_not_change_board
+    opponant = @game.opponant
+    opponant_board = @game.opponant_board
+    opponant = @game.opponant
+    @game.play_move(0,0)
+    refute_equal @game.opponant, opponant
+    @game.play_move(0,0)
+    assert_equal @game.opponant, opponant
+    response = @game.play_move(0,0)
+    assert_equal @game.opponant, opponant
+    assert_equal "Invalid Play. Try again.", response
+  end
 end

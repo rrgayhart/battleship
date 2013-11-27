@@ -53,7 +53,7 @@ class Game
 
   def play_move(x,y)
     if opponant_board.return_status(x,y)
-      "Invalid Play"
+      "Invalid Play. Try again."
     else
       if opponant_board.marker_taken?(x,y)
         opponant_board.place_status(x,y,"hit")
@@ -76,12 +76,8 @@ class Game
       else
         opponant_board.place_status(x,y,"miss")
       end
+      play_turn
     end
-  end
-
-  def move
-    player = who_is_playing
-    play_turn
   end
 
   def play_turn
