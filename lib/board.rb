@@ -29,13 +29,10 @@ class Board
       #return 'MISS'
     end
   end
-
-  #Ship should hold its own coordinates!!!!
   
   def find_ship_markers(ship)
     coordinates = ship.coordinates
   end
-
 
   def marker_taken?(x,y)
     marker = find_marker(x,y)
@@ -59,37 +56,22 @@ class Board
   end
 
   def place_ship(x,y,orientation,ship)
-    times = ship.size - 1
-    ship_id = ship.id
-    if validate_placement(x,y,times,orientation)
-      ship.assign_coordinates(x,y,orientation)
-      times.times do
-        place_ship_mark(x,y,ship_id)
-        if orientation == 'v'
-          x += 1
-        else
-          y += 1
-        end
-      end
-    else
+    if !validate_placement(x,y,ship,orientation)
       return "Sorry the ship cannot go there"
     end
   end
 
-  def validate_placement(x,y,length,orientation)
+  def validate_placement(x,y,ship,orientation)
     valid = true
-    x = x
-    length = length
-    length.times do
+    ship.assign_coordinates(x,y,orientation)
+    coordinates = ship.coordinates
+    coordinates.each do |marker|
+      x = marker[0]
+      y = marker[1]
       if marker_taken?(x,y)
+        ship.clear_coordinates
         valid = false
         break
-      else
-        if orientation == 'v'
-          x += 1
-        else
-          y += 1
-        end
       end
     end
     return valid

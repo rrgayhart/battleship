@@ -25,7 +25,7 @@ class Ship
   end
 
   def assign_coordinates(x,y,orientation)
-    @coordinates = []
+    clear_coordinates
     size = self.size
     size.times do
         marker = []
@@ -38,6 +38,10 @@ class Ship
       end
       @coordinates << marker
     end
+  end
+
+  def clear_coordinates
+    @coordinates = []
   end
 
 end

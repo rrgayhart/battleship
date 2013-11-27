@@ -7,6 +7,7 @@ class BoardTest < MiniTest::Test
 
   def setup
     @board = Board.new
+    @patrol_boat = Ship.new(1)
   end
 
   def test_it_exists
@@ -31,11 +32,11 @@ class BoardTest < MiniTest::Test
   end
 
   def test_validate_placement
-    assert_equal true, @board.validate_placement(1,0,2,'h')
+    assert_equal true, @board.validate_placement(1,0,@patrol_boat,'h')
     @board.place_ship_mark(1,0,2)
-    assert_equal false, @board.validate_placement(1,0,2,'h')
+    assert_equal false, @board.validate_placement(1,0,@patrol_boat,'h')
     @board.place_ship_mark(1,8,2)
-    assert_equal false, @board.validate_placement(1,7,3,'h')
+    assert_equal false, @board.validate_placement(1,7,@patrol_boat,'h')
   end
 
   def test_return_ship_id_pulls_id
