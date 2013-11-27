@@ -60,11 +60,19 @@ class BoardTest < MiniTest::Test
   end
 
   def test_find_all_of_ships_markers
-    skip
     ship = Ship.new(1)
-    @board.place_ship_mark(1,0,ship.id)
-    @board.place_ship_mark(1,1,ship.id)
-    assert_equal [[1,0][1,1]], @board.find_ship_markers(ship)
+    @board.place_ship(1,1,'h',ship)
+    @board.place_status(1,2,"hit")
+    coords = [[1, 1], [1, 2]]
+    assert_equal coords, @board.find_ship_markers(ship)
+  end
+
+  def test_find_all_of_ships_markers_even_if_vertical
+    ship = Ship.new(1)
+    @board.place_ship(1,1,'v',ship)
+    @board.place_status(1,2,"hit")
+    coords = [[1, 1], [2, 1]]
+    assert_equal coords, @board.find_ship_markers(ship)
   end
 
   def test_play_move_on_empty_space_sets_status_to_miss

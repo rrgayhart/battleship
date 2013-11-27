@@ -15,6 +15,7 @@ class Board
 #be in board
   def play_move(x,y)
     if marker_taken?(x,y)
+
       # Switch to opponants board
       # Grab the id
       # Check if all other instances of the id are 'hit'
@@ -29,23 +30,11 @@ class Board
     end
   end
 
-  # def find_ship_markers(ship)
-  #   markers = []
-  #   length = ship.size
-  #   id = ship.id
-  #   checkable_rows = @board_view
-  #   measure = 0
-  #   checkable_rows.each do |row|
-  #     measure += 1
-  #     if row.include?(id)
-  #       break
-  #     end
-  #   end 
-  #   checkable_rows
-  #   x = measure - 1
-  #   checkable_rows[x].count
-  # end
-
+  #Ship should hold its own coordinates!!!!
+  
+  def find_ship_markers(ship)
+    coordinates = ship.coordinates
+  end
 
 
   def marker_taken?(x,y)
@@ -73,6 +62,7 @@ class Board
     times = ship.size - 1
     ship_id = ship.id
     if validate_placement(x,y,times,orientation)
+      ship.assign_coordinates(x,y,orientation)
       times.times do
         place_ship_mark(x,y,ship_id)
         if orientation == 'v'

@@ -2,13 +2,14 @@ require_relative 'rules'
 
 class Ship
   include Rules
-  attr_accessor :size, :name, :hits, :id
+  attr_accessor :size, :name, :hits, :id, :coordinates
 
   def initialize(id)
     @id = id
     @size = get_size(id)
     @name = get_name(id)
     @hits ||= 0
+    @coordinates = []
   end
 
   def ship_types
@@ -22,4 +23,21 @@ class Ship
   def get_name(id)
     ship_types[id][1]
   end
+
+  def assign_coordinates(x,y,orientation)
+    @coordinates = []
+    size = self.size
+    size.times do
+        marker = []
+        marker << x
+        marker << y
+      if orientation == "h"
+        y += 1
+      else
+        x += 1
+      end
+      @coordinates << marker
+    end
+  end
+
 end
