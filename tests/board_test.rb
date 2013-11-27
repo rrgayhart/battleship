@@ -76,16 +76,9 @@ class BoardTest < MiniTest::Test
     assert_equal coords, @board.find_ship_markers(ship)
   end
 
-
-
   def test_place_ship_functions
     assert_equal "Ship placed", @board.place_ship(0,0,'h',Ship.new(2))
     assert_equal "Sorry the ship cannot go there", @board.place_ship(0,1,'v',Ship.new(2))
-  end
-
-  def test_check_marker_returns_status
-    skip
-    assert_nil @board.check_marker_status(0,0)
   end
 
   def test_board_view_shows_player_view_of_nils

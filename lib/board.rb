@@ -30,8 +30,6 @@ class Board
   #   end
   # end
 
-
-  
   def find_ship_markers(ship)
     ship.coordinates
   end
@@ -108,14 +106,30 @@ class Board
     @board_view[x][y]
   end
 
+  def show_only_status(x,y)
+    if return_status(x,y)
+      ans = return_status(x,y)
+    else
+      ans = ' x '
+    end
+    ans
+  end
+
   def opponant_view
     row = 0
     puts
-    print ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
+    print ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
     puts
-    12.times do
-      print "#{row} #{self.board_view[row]}"
-      puts
+    y = 0
+    12.times do 
+      array = []
+      x = 0
+      12.times do
+        array << show_only_status(x,y)
+        x += 1
+      end
+      puts "#{row} #{array}"
+      y += 1
       row += 1
     end
   end
@@ -123,7 +137,7 @@ class Board
   def display_board_view
     row = 0
     puts
-    print ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
+    print ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
     puts
     12.times do
       print "#{row} #{self.board_view[row]}"
