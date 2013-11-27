@@ -21,4 +21,8 @@ class PlayerTest < MiniTest::Test
     assert_equal @player1.ships[4].name, "Aircraft Carrier"
   end
 
+  def test_find_ship_returns_correct_ship_by_id
+    assert_equal "Patrol Boat", @player1.find_ship(1).name
+  end
+
 end

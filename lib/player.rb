@@ -15,4 +15,9 @@ class Player
     @ships << Ship.new(5)
   end
 
+  def find_ship(id)
+    id -= 1
+    @ships[id]
+  end
+
 end

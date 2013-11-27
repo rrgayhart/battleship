@@ -50,15 +50,41 @@ class GameTest < MiniTest::Test
     assert_equal 1, @game.x_translate('B')
   end
 
-#   def test_marker_status_finds_placed_markers
-#     assert @game.place_ship(1,'a',0,'h')
-#     assert_equal @game.marker_status(0,0), "taken"
-#     assert_equal @game.marker_status(5,5), "empty"
-#   end
+  def test_play_move_on_taken_spot_sets_status_to_hit
+    opponant = @game.opponant
+    ship = opponant.ships[0]
+    board = @game.opponant_board
+    board.place_ship(0,0,'h',ship)
+    @game.play_move(0,0)
+    assert_equal "hit", board.return_status(0,0)
+  end
 
-#   def test_ship_cannot_be_placed_on_taken_spot
-#      assert @game.place_ship(5,'a',0,'h')
-#      refute @game.place_ship(5,'a',0,'h')
-#   end
+  def test_play_move_on_empty_spot_sets_status_to_miss
+    @game.play_move(0,0)
+    board = @game.opponant_board
+    assert_equal "miss", board.return_status(0,0)
+  end
+
+  def test_hitting_all_spots_on_ship_returns_sunk
+    opponant = @game.opponant
+    ship = opponant.ships[0]
+    board = @game.opponant_board
+    board.place_ship(0,0,'h',ship)
+    @game.play_move(0,0)
+    assert_equal "hit", board.return_status(0,0)
+    @game.play_move(0,1)
+    assert_equal "sunk", board.return_status(0,1)
+    assert_equal "sunk", board.return_status(0,0)
+  end
+
+  def test_play_move_on_taken_spot_returns_hit_for_all_ids
+    skip
+    @board.place_ship_mark(1,0,1)
+    @board.place_ship_mark(1,1,1)
+    @board.play_move(1,0)
+    @board.play_move(1,1)
+    assert_equal "sunk", @board.return_status(1,1)
+    assert_equal "sunk", @board.return_status(1,0)
+  end
 
 end

@@ -76,35 +76,11 @@ class BoardTest < MiniTest::Test
     assert_equal coords, @board.find_ship_markers(ship)
   end
 
-  def test_play_move_on_empty_space_sets_status_to_miss
-    skip
-    @board.play_move(0,0)
-    assert_equal "miss", @board.return_status(0,0)
-  end
-
-  def test_play_move_on_taken_spot_returns_hit
-    skip
-    @board.place_ship_mark(1,0,2)
-    @board.place_ship_mark(1,1,2)
-    @board.play_move(1,0)
-    assert_equal "hit", @board.return_status(1,0)
-  end
-
-  def test_play_move_on_taken_spot_returns_hit_for_all_ids
-    skip
-    @board.place_ship_mark(1,0,1)
-    @board.place_ship_mark(1,1,1)
-    @board.play_move(1,0)
-    @board.play_move(1,1)
-    assert_equal "sunk", @board.return_status(1,1)
-    assert_equal "sunk", @board.return_status(1,0)
-  end
 
 
   def test_place_ship_functions
-    skip
-    @board.place_ship(0,0,'h',Ship.new(2))
-    @board.place_ship(0,8,'v',Ship.new(2))
+    assert_equal "Ship placed", @board.place_ship(0,0,'h',Ship.new(2))
+    assert_equal "Sorry the ship cannot go there", @board.place_ship(0,1,'v',Ship.new(2))
   end
 
   def test_check_marker_returns_status

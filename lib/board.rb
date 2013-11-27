@@ -13,25 +13,27 @@ class Board
 
 #This should move to game and the logic should
 #be in board
-  def play_move(x,y)
-    if marker_taken?(x,y)
+  # def play_move(x,y)
+  #   if marker_taken?(x,y)
 
-      # Switch to opponants board
-      # Grab the id
-      # Check if all other instances of the id are 'hit'
-      # If not, Add 'hit' as status
-      # Return Hit
-      # If all except this one has a hit
-      # Set status as "sunk" for all matching ship ids
-      # Return 'YOU SUNK A SHIP'
-    else
-      #set the status as "miss"
-      #return 'MISS'
-    end
-  end
+  #     # Switch to opponants board
+  #     # Grab the id
+  #     # Check if all other instances of the id are 'hit'
+  #     # If not, Add 'hit' as status
+  #     # Return Hit
+  #     # If all except this one has a hit
+  #     # Set status as "sunk" for all matching ship ids
+  #     # Return 'YOU SUNK A SHIP'
+  #   else
+  #     #set the status as "miss"
+  #     #return 'MISS'
+  #   end
+  # end
+
+
   
   def find_ship_markers(ship)
-    coordinates = ship.coordinates
+    ship.coordinates
   end
 
   def marker_taken?(x,y)
@@ -56,9 +58,19 @@ class Board
   end
 
   def place_ship(x,y,orientation,ship)
+    ship_id = ship.id
     if !validate_placement(x,y,ship,orientation)
-      return "Sorry the ship cannot go there"
+      answer = "Sorry the ship cannot go there"
+    else
+      coordinates = ship.coordinates
+      coordinates.each do |marker|
+        mx = marker[0]
+        my = marker[1]
+        place_ship_mark(mx,my,ship_id)
+        answer = "Ship placed"
+      end
     end
+    answer
   end
 
   def validate_placement(x,y,ship,orientation)
