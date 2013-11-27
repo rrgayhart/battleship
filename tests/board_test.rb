@@ -81,23 +81,4 @@ class BoardTest < MiniTest::Test
     assert_equal "Sorry the ship cannot go there", @board.place_ship(0,1,'v',Ship.new(2))
   end
 
-  def test_board_view_shows_player_view_of_nils
-    skip
-    num = 0
-    12.times do
-      assert_nil @board.board_view[0][num]
-      num += 1
-    end
-  end
-
-  def test_opponant_view_shows_view_of_nils
-    skip
-    num = 0
-    12.times do
-      assert_nil @board.board_view[0][num]
-      num += 1
-    end
-  end
-
-
 end

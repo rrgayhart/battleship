@@ -1,12 +1,10 @@
 require_relative 'game'
 require_relative 'ship'
 require_relative 'player'
-require_relative 'moves'
 require_relative 'stories'
 
 class Battleship
   attr_accessor :game
-  include Moves
   include Stories
 
   def initialize
@@ -19,7 +17,7 @@ class Battleship
     ship_count = 5
     5.times do
       board_set_up(5)
-      ship_count -=1
+      ship_count -= 1
     end
   end
 

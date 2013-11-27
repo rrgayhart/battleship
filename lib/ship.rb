@@ -1,7 +1,5 @@
-require_relative 'rules'
-
 class Ship
-  include Rules
+
   attr_accessor :size, :name, :hits, :id, :coordinates
 
   def initialize(id)

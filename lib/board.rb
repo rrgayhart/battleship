@@ -7,28 +7,8 @@ class Board
   end
 
   def make_board(size)
-    marker = Array.new
     Array.new(size) { Array.new(size)}
   end
-
-#This should move to game and the logic should
-#be in board
-  # def play_move(x,y)
-  #   if marker_taken?(x,y)
-
-  #     # Switch to opponants board
-  #     # Grab the id
-  #     # Check if all other instances of the id are 'hit'
-  #     # If not, Add 'hit' as status
-  #     # Return Hit
-  #     # If all except this one has a hit
-  #     # Set status as "sunk" for all matching ship ids
-  #     # Return 'YOU SUNK A SHIP'
-  #   else
-  #     #set the status as "miss"
-  #     #return 'MISS'
-  #   end
-  # end
 
   def find_ship_markers(ship)
     ship.coordinates
