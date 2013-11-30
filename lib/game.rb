@@ -45,7 +45,7 @@ class Game
     else
       return @player1
     end
-  end
+end
 
   def play_move(x,y)
     if opponant_board.return_status(x,y)
@@ -103,6 +103,4 @@ class Game
      x_coord = ('A'..'L').zip(0..11)
      x_coord.select {|x| x[0] == letter }[0][1]
   end
-
-
 end

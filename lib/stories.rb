@@ -16,7 +16,7 @@ module Stories
 
   def board_set_up1
     puts "Here is your board."
-    @game.display_board
+    show_player_board
   end
 
 end
